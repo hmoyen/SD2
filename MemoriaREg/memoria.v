@@ -1,6 +1,6 @@
 module memoria(ads, clk, we, din, dout);
-
-input [4:0] ads;
+  
+input [5 :0] ads;
 input clk;
 input we;
 input [63:0] din;
@@ -13,12 +13,14 @@ end
 
 always@(posedge clk) begin
 
-    if (we) begin
-        registradores[ads] <= din; // Escreve na memoria
-    end
-    else begin
-        dout <= registradores[ads]; // Lê a memoria
-    end
+    if (we)
+        begin
+          registradores[ads] <= din; // Escreve na memoria
+        end
+    else 
+        begin
+            dout <= registradores[ads]; // Lê a memoria
+        end
 end
 
 
