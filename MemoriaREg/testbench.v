@@ -3,15 +3,15 @@
 module testbench;
 
     // Inputs
-    reg [3:0] a_tb;
-    reg [3:0] b_tb;
+    reg [4:0] a_tb;
+    reg [4:0] b_tb;
     reg clock_tb;
-    wire sinal_tb;
-    wire [4:0] res_tb;
+    reg sinal_tb;
+    wire [5:0] res_tb;
     wire [63:0] doutMem_tb;
     reg weReg_tb;
     reg [4:0] Rw_tb;
-    reg [4:0] Ra_tb. Rb_tb;
+    reg [4:0] Ra_tb, Rb_tb;
     wire [63:0] doutA_tb;
     wire [63:0] doutB_tb;
     reg weMem_tb;
@@ -44,23 +44,30 @@ module testbench;
         .dout(doutMem_tb)
     );
 
-    initial begin
+    initial 
+    begin
         clock_tb = 0;
+        sinal_tb=0;
         a_tb = 0;
         b_tb = 16;
         weReg_tb = 1;
+        Rw_tb = 10;
+        Ra_tb=10;
         #10
-        Rw_tb = 
-
-
-
-
+        #10
+        weReg_tb = 0;
+        #10
+             $display(doutA_tb);
         
+      
+       
+$finish;
 
-        
+     
     end
 
-    always  #10 clock_tb = ~clock_tb;
+        always #1 clock_tb = ~clock_tb;
+    
     
 
 

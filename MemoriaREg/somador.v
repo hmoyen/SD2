@@ -1,9 +1,9 @@
 module somador(a,b,sinal,soma);
 
-    input [3:0] a;
-    input [3:0] b;
+    input [4:0] a;
+    input [4:0] b;
     input sinal;
-    output reg [4:0] soma;
+    output reg [5:0] soma;
 
     always @(a,b) begin
         if (sinal == 1'b0) begin
@@ -12,6 +12,7 @@ module somador(a,b,sinal,soma);
         else begin
             soma <= a - b;
         end
+      
     end
 
 endmodule
