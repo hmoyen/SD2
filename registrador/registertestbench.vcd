@@ -1,0 +1,92 @@
+$date
+	Wed May  3 11:26:19 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb $end
+$var wire 16 ! value_out [15:0] $end
+$var reg 1 " clock $end
+$var reg 1 # enable $end
+$var reg 16 $ value_in [15:0] $end
+$scope module r $end
+$var wire 1 " clock $end
+$var wire 16 % data_in [15:0] $end
+$var wire 1 # r_enable $end
+$var reg 16 & data_out [15:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx &
+bx %
+bx $
+1#
+0"
+bx !
+$end
+#1
+1"
+#2
+0"
+#3
+1"
+#4
+0"
+#5
+b11111 !
+b11111 &
+1"
+b11111 $
+b11111 %
+#6
+0"
+#7
+1"
+#8
+0"
+#9
+1"
+#10
+0"
+b1111111 $
+b1111111 %
+#11
+b1111111 !
+b1111111 &
+1"
+#12
+0"
+#13
+1"
+#14
+0"
+#15
+1"
+0#
+#16
+0"
+#17
+1"
+#18
+0"
+#19
+1"
+#20
+0"
+b1111111111 $
+b1111111111 %
+#21
+1"
+#22
+0"
+#23
+1"
+#24
+0"
+#25
+1"
