@@ -1,11 +1,22 @@
-module adder (a,b,sinal, soma);
+module ULA (a,b,opcode, soma, flag);
 
-input signed [63:0] a, b;
-output signed [63:0] soma;
-input sinal;
+input [63:0] a, b;
+reg signed [63:0] a_sig, b_sig
+output [63:0] soma;
+input [6:0] opcode;
+output flag;
+
+assign a_sig = a;
+assign b_sig = b;
+
+assign soma = (opcode == 7'b0000001) ? (a_sig + b_sig): // load
+            = (opcode == 7'b0000010) ? (a_sig + b_sig): // store
+            = (opcode == 7'b0000011) ? (a_sig + b_sig): // add
+            = (opcode == 7'b0000101) ? (a_sig + b_sig): // addi
+            = (opcode == 7'b)
+                                       (a_sig + b_sig); // as outras
 
 
-assign soma = (sinal == 1'b0) ? (a + b):(a-b);
             
 endmodule
 
@@ -106,11 +117,15 @@ input             clock;
 input             r_enable;
 input      [63:0] data_in;
 output reg [31:0] data_out;
+output reg [6:0] opcode;
 
 always @(posedge clock)
 begin
-    if(r_enable)
+    if(r_enable) begin
         data_out <= data_in[31:0];
+        opcode <= data_in[6:0];
+    end
+
 end
 
 endmodule

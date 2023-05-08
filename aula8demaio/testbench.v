@@ -22,8 +22,7 @@ module testbench;
     wire [63:0] PC_tb;
     wire [63:0] IR_tb;
     wire [31:0] doutIR_tb;
-
-    adder uut (
+ULA uut (
         .a(doutA_tb), 
         .b(S1_tb), 
         .soma(res_tb),
