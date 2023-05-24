@@ -217,6 +217,7 @@ module testbench;
         #10
         $display("Flag BLTU entre x5 e x4: %d", flag_tb); // Veja que a flag está como 1, pois x5 <x4.
         #10
+        $display(PC_tb);
 
         //************** Começa BGEU*******************************************************
 
@@ -236,7 +237,88 @@ module testbench;
         $display("Flag BGEU entre x5 e x4: %d", flag_tb); // Veja que a flag está como 0, pois x5 <x4.
         #10
 
+        $display(PC_tb);
+        #10
 
+
+  
+        /***********Começa o add********************************************************************/
+
+        /*****Aqui foi feito o BGEU de novo para ir à instrução com endereço 7*********************/
+
+        wePC_tb  = 1; // Vamos mudar a instrução para BGEU
+        weMemIns_tb =0;
+        weIR_tb = 1; // Para registrar a instrução atual
+        sinalMux1_tb = 1; // Seleciona doutB
+        sinalMux2_tb = 0; // Don't care se o que vai para o Din do Banco de Registradores é o resultado da soma ou a saída da memória
+        weMem_tb = 0; // Não vamos escrever nada na memória
+        weReg_tb = 0; // Não vamos escrever nada no banco de registradores
+
+        #10
+        #10
+        wePC_tb  = 0; 
+        #10
+        #10
+        $display("Endereço agora vale:");
+        #10
+
+        $display(PC_tb);
+        #10
+        #10
+        $display("eh o res");
+        $display(res_tb);
+
+        /***************Começa o sub*********************************/
+
+        /*Aqui foi feito o BGEU de novo para ir à instrução com endereço 8*/
+
+        wePC_tb  = 1; // Vamos mudar a instrução para BGEU
+        weMemIns_tb =0;
+        weIR_tb = 1; // Para registrar a instrução atual
+        sinalMux1_tb = 1; // Seleciona doutB
+        sinalMux2_tb = 0; // Don't care se o que vai para o Din do Banco de Registradores é o resultado da soma ou a saída da memória
+        weMem_tb = 0; // Não vamos escrever nada na memória
+        weReg_tb = 0; // Não vamos escrever nada no banco de registradores
+
+        #10
+        #10
+        wePC_tb  = 0; 
+        #10
+        #10
+        $display("Endereço agora vale:");
+        #10
+
+        $display(PC_tb);
+        #10
+        #10
+        $display("eh o res");
+        $display(res_tb);
+
+        /***************Começa o addi*********************************/
+
+        /*Aqui foi feito o BGEU de novo para ir à instrução com endereço 9*/
+
+        wePC_tb  = 1; // Vamos mudar a instrução para BGEU
+        weMemIns_tb =0;
+        weIR_tb = 1; // Para registrar a instrução atual
+        sinalMux1_tb = 0; // Seleciona imm
+        sinalMux2_tb = 0; // Don't care se o que vai para o Din do Banco de Registradores é o resultado da soma ou a saída da memória
+        weMem_tb = 0; // Não vamos escrever nada na memória
+        weReg_tb = 0; // Não vamos escrever nada no banco de registradores
+
+        #10
+        #10
+        wePC_tb  = 0; 
+        #10
+        #10
+        $display("Endereço agora vale:");
+        #10
+
+        $display(PC_tb);
+        #10
+        #10
+        $display("eh o res");
+        $display(res_tb);
         
 
 
