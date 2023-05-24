@@ -172,7 +172,9 @@ initial begin
     registradores[3] = {1'b1, 6'b111111, 5'b00001, 5'b00011, 3'b101, 4'b1111, 1'b1, 7'b1100011}; // BGE, compara x1 e x3, caso FALSE, vai para o próximo (BLTU)
     registradores[4] = {1'b1, 6'b000000, 5'b00100, 5'b00101, 3'b110, 4'b0010, 1'b0, 7'b1100011}; // BLTU, compara x5 e x4, caso TRUE, vai para BGEU
     registradores[6] = {1'b0, 6'b000000, 5'b00100, 5'b00101, 3'b111, 4'b0010, 1'b0, 7'b1100011}; // BGEU, compara x5 e x4, caso TRUE, vai para ...
-
+    registradores[7] = {1'b0, 6'b000000, 5'b00001, 5'b00011, 3'b000, 4'b0010, 1'b0, 7'b0110011}; //Add que somará o rs2(vale 1) e rs1(vale 4)
+    registradores[8] = {1'b0, 6'b010000, 5'b00011, 5'b00001, 3'b000, 4'b0010, 1'b0, 7'b0110011}; //Sub que subtrará o rs2(vale 1) e rs1(vale 4)
+    registradores[9] = {1'b0, 6'b010000, 5'b00011, 5'b00001, 3'b000, 4'b0010, 1'b0, 7'b0010011}; //Addi
     // Nao existe SUBI, como podemos apenar colocar o imediato do ADDI (sempre lido como complemento de 2) como um numero negativo
 
     
