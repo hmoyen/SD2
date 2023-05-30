@@ -1,0 +1,264 @@
+$date
+	Tue May 30 20:05:43 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module testbench $end
+$var wire 2 ! aluop_tb [1:0] $end
+$var wire 1 " flag_tb $end
+$var wire 32 # somaimm_tb [31:0] $end
+$var wire 32 $ somafour_tb [31:0] $end
+$var wire 64 % res_tb [63:0] $end
+$var wire 7 & opcode_tb [6:0] $end
+$var wire 64 ' imm_tb [63:0] $end
+$var wire 1 ( funct7_tb $end
+$var wire 3 ) funct3_tb [2:0] $end
+$var wire 64 * doutMem_tb [63:0] $end
+$var wire 32 + doutIR_tb [31:0] $end
+$var wire 64 , doutB_tb [63:0] $end
+$var wire 64 - doutA_tb [63:0] $end
+$var wire 4 . control_tb [3:0] $end
+$var wire 32 / S5_tb [31:0] $end
+$var wire 64 0 S4_tb [63:0] $end
+$var wire 64 1 S2_tb [63:0] $end
+$var wire 64 2 S1_tb [63:0] $end
+$var wire 5 3 Rw_tb [4:0] $end
+$var wire 5 4 Rb_tb [4:0] $end
+$var wire 5 5 Ra_tb [4:0] $end
+$var wire 32 6 PC_tb [31:0] $end
+$var wire 32 7 IR_tb [31:0] $end
+$var wire 32 8 C_tb [31:0] $end
+$var reg 1 9 clock_tb $end
+$var reg 32 : instruction_tb [31:0] $end
+$var reg 1 ; reset_tb $end
+$var reg 1 < sinalMux1_tb $end
+$var reg 2 = sinalMux2_tb [1:0] $end
+$var reg 1 > sinalMux4_tb $end
+$var reg 1 ? weIR_tb $end
+$var reg 1 @ weMem_tb $end
+$var reg 1 A wePC_tb $end
+$var reg 1 B weReg_tb $end
+$scope module alu $end
+$var wire 2 C aluop [1:0] $end
+$var wire 1 ( funct7 $end
+$var wire 3 D funct3 [2:0] $end
+$var wire 4 E control [3:0] $end
+$upscope $end
+$scope module hhh $end
+$var wire 1 ; reset $end
+$var wire 32 F tb [31:0] $end
+$var wire 32 G dout_PC [31:0] $end
+$var wire 32 H S5 [31:0] $end
+$upscope $end
+$scope module hii $end
+$var wire 32 I palavra [31:0] $end
+$var wire 7 J opcode [6:0] $end
+$var wire 20 K imm_field_typeB [19:0] $end
+$var wire 12 L imm_field_typeA [11:0] $end
+$var wire 64 M imm [63:0] $end
+$upscope $end
+$scope module huu $end
+$var wire 1 9 clock $end
+$var wire 1 ? r_enable $end
+$var wire 32 N data_in [31:0] $end
+$var reg 32 O data_out [31:0] $end
+$var reg 7 P opcode [6:0] $end
+$upscope $end
+$scope module ihs $end
+$var wire 1 " flag $end
+$var wire 32 Q imm_some [31:0] $end
+$var wire 32 R four_some [31:0] $end
+$var wire 32 S S3 [31:0] $end
+$upscope $end
+$scope module iss $end
+$var wire 1 > sinalMux $end
+$var wire 64 T doutA [63:0] $end
+$var wire 64 U S4 [63:0] $end
+$var wire 32 V PC [31:0] $end
+$upscope $end
+$scope module its $end
+$var wire 64 W dout [63:0] $end
+$var wire 64 X imm [63:0] $end
+$var wire 32 Y soma [31:0] $end
+$upscope $end
+$scope module itt $end
+$var wire 32 Z soma [31:0] $end
+$var wire 32 [ dout_pc [31:0] $end
+$upscope $end
+$scope module uhh $end
+$var wire 1 9 clock $end
+$var wire 32 \ data_in [31:0] $end
+$var wire 1 A r_enable $end
+$var reg 32 ] data_out [31:0] $end
+$upscope $end
+$scope module utH $end
+$var wire 32 ^ ads [31:0] $end
+$var wire 32 _ dout [31:0] $end
+$var wire 5 ` rs2 [4:0] $end
+$var wire 5 a rs1 [4:0] $end
+$var wire 5 b rd [4:0] $end
+$var wire 7 c opcode [6:0] $end
+$var wire 1 ( funct7 $end
+$var wire 3 d funct3 [2:0] $end
+$upscope $end
+$scope module utt $end
+$var wire 5 e Ra [4:0] $end
+$var wire 5 f Rb [4:0] $end
+$var wire 5 g Rw [4:0] $end
+$var wire 1 9 clk $end
+$var wire 1 B we $end
+$var wire 64 h din [63:0] $end
+$var reg 64 i doutA [63:0] $end
+$var reg 64 j doutB [63:0] $end
+$upscope $end
+$scope module utu $end
+$var wire 64 k din [63:0] $end
+$var wire 1 @ we $end
+$var wire 64 l dout [63:0] $end
+$var wire 64 m ads [63:0] $end
+$upscope $end
+$scope module utv $end
+$var wire 64 n doutB [63:0] $end
+$var wire 64 o imm [63:0] $end
+$var wire 1 < sinalMux $end
+$var wire 64 p S1 [63:0] $end
+$upscope $end
+$scope module uut $end
+$var wire 64 q a [63:0] $end
+$var wire 64 r b [63:0] $end
+$var wire 1 " flag $end
+$var wire 4 s sinal [3:0] $end
+$var wire 64 t soma [63:0] $end
+$upscope $end
+$scope module uvv $end
+$var wire 32 u PC_four [31:0] $end
+$var wire 32 v PC_imm [31:0] $end
+$var wire 64 w dout [63:0] $end
+$var wire 2 x sinalMux [1:0] $end
+$var wire 64 y soma [63:0] $end
+$var wire 64 z S2 [63:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx z
+bx y
+bx x
+bx w
+bx v
+b100 u
+bx t
+bx s
+bx r
+bx q
+bx p
+bx o
+bx n
+bx m
+bx l
+bx k
+bx j
+bx i
+bx h
+b1001 g
+b1000 f
+b1 e
+b0 d
+b110011 c
+b1001 b
+b1 a
+b1000 `
+b100000001000010010110011 _
+b1001 ^
+b0 ]
+b100 \
+b0 [
+b100 Z
+bx Y
+bx X
+bx W
+b0 V
+bx U
+bx T
+b100 S
+b100 R
+bx Q
+bx P
+bx O
+b100000001000010010110011 N
+bx M
+bx L
+bx K
+b110011 J
+bx I
+b1001 H
+b0 G
+b1001 F
+bx E
+b0 D
+bz C
+xB
+xA
+x@
+x?
+x>
+bx =
+x<
+1;
+b1001 :
+x9
+b100 8
+b100000001000010010110011 7
+b0 6
+b1 5
+b1000 4
+b1001 3
+bx 2
+bx 1
+bx 0
+b1001 /
+bx .
+bx -
+bx ,
+bx +
+bx *
+b0 )
+0(
+bx '
+b110011 &
+bx %
+b100 $
+bx #
+0"
+bz !
+$end
+#10
+bx 3
+bx b
+bx g
+bx 5
+bx a
+bx e
+bx 4
+bx `
+bx f
+bx &
+bx J
+bx c
+x(
+bx )
+bx D
+bx d
+bx 7
+bx N
+bx _
+b0 /
+b0 H
+b0 ^
+0;
+#220
