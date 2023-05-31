@@ -10,17 +10,16 @@ module testbench;
 
     // Inputs
     reg clock_tb;
-    reg sinal_tb;
     reg reset_tb;
-    wire [31:0] S5_tb;
     reg [31:0] instruction_tb;
-    wire [1:0] aluop_tb; // UC para ALUControl
+
+    wire [31:0] S5_tb;
     wire funct7_tb; // Da memória de instrução para a ALUControl
     wire [2:0] funct3_tb; // Da memória de instrução para a ALUControl
     wire [3:0] control_tb; // Da ALUControl para a ULA
     wire signed [63:0] res_tb;
     wire [63:0] doutMem_tb;
-    reg weReg_tb;
+    wire [3:0] state_reg_tb;
     wire [4:0] Rw_tb;
     wire [4:0] Ra_tb, Rb_tb;
     wire [6:0] opcode_tb;
@@ -29,10 +28,6 @@ module testbench;
     wire signed [63:0] S1_tb;
     wire signed [63:0] S2_tb;
     wire signed [63:0] S4_tb;
-    reg weMem_tb, wePC_tb, weIR_tb, weMemIns_tb;
-    reg sinalMux1_tb;
-    reg [1:0] sinalMux2_tb;
-    reg sinalMux4_tb;
     wire [31:0] C_tb;
     wire [31:0] PC_tb;
     wire [31:0] IR_tb;
@@ -40,6 +35,16 @@ module testbench;
     wire flag_tb;
     wire signed [63:0] imm_tb;
     wire [31:0] somafour_tb, somaimm_tb;
+
+    // Sinais UC
+
+    wire weMem_tb, wePC_tb, weIR_tb;
+    wire sinalMux1_tb;
+    wire [1:0] sinalMux2_tb;
+    wire sinalMux4_tb;
+    wire [1:0] aluop_tb; // UC para ALUControl
+
+
 
     ULA uut (
         .a(doutA_tb), 
@@ -88,13 +93,7 @@ module testbench;
     memoria_ins utH (
 
         .ads(S5_tb),
-        .dout(IR_tb),
-        .rs1(Ra_tb),
-        .rs2(Rb_tb),
-        .rd(Rw_tb),
-        .opcode(opcode_tb),
-        .funct7(funct7_tb),
-        .funct3(funct3_tb)
+        .dout(IR_tb)
     );
 
     PC uhh(
@@ -108,7 +107,13 @@ module testbench;
         .clock(clock_tb),
         .r_enable(weIR_tb),
         .data_in(IR_tb),
-        .data_out(doutIR_tb)
+        .data_out(doutIR_tb),
+        .rs1(Ra_tb),
+        .rs2(Rb_tb),
+        .rd(Rw_tb),
+        .opcode(opcode_tb),
+        .funct7(funct7_tb),
+        .funct3(funct3_tb)
 
     );
 
@@ -159,6 +164,27 @@ module testbench;
         .control(control_tb)
     );
 
+    state_machineUC sta (
+        .clk(clock_tb),
+        .reset(reset_tb),
+        .state_reg(state_reg_tb)
+    );
+
+    UC ucc(
+        .clk(clock_tb),
+        .state_reg(state_reg_tb),
+        .opcode(opcode_tb),
+        .aluop(aluop_tb),
+        .Mux1(sinalMux1_tb),
+        .Mux2(sinalMux2_tb),
+        .Mux4(sinalMux4_tb),
+        .weMem(weMem_tb),
+        .weReg(weReg_tb),
+        .weIR(weIR_tb),
+        .wePc(wePC_tb)
+
+    );
+
 
 
     initial $dumpfile("testbench.vcd");
@@ -168,9 +194,9 @@ module testbench;
     begin
         
         //*******************************Abaixo é a simulação: ********************************************************************
-
+        clock_tb = 1;
         reset_tb = 1;
-        instruction_tb = 9; // ADD
+        instruction_tb = 0; // ADD
         #10
         reset_tb = 0; // INSTRUCTION FETCH FINISHED
         #10

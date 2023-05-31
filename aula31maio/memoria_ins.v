@@ -1,4 +1,4 @@
-module memoria_ins(ads, dout, rs1, rs2, rd, opcode, funct7, funct3);
+module memoria_ins(ads, dout);
   
 input [31:0] ads; // Program counter (PC) in RISC-V is 32 bits long (can addres 2³² instructions)
 // input reset;
@@ -42,8 +42,8 @@ initial begin
     // registradores[6] = {1'b0, 6'b000000, 5'b00100, 5'b00101, 3'b111, 4'b0010, 1'b0, 7'b1100011}; // BGEU, compara x5 e x4, caso FALSE, vai para o próximo (LOAD)
     // registradores[7] = {12'b000000000011, 5'b00011, 3'b010, 5'b00111, 7'b0000011}; // LOAD, escreve no x7 o que está no x3 #3 da memoria (0 + 3 = 3), logo o número 14
     // registradores[8] = {7'b1111111, 5'b01000, 5'b00111, 3'b010, 5'b11111, 7'b0100011}; // STORE, armazena o valor do x8 no x7 #-1 da memoria
-    registradores[9] = {7'b0000000, 5'b01000, 5'b00001,3'b000,  5'b01001, 7'b0110011}; // ADD, armazena o valor x8 + x1 no x9
-    registradores[10] = {7'b0100000, 5'b00001, 5'b01000, 3'b000,  5'b01010, 7'b0110011}; // SUB, armazena o valor x8 - x1 no x10
+    registradores[0] = {7'b0000000, 5'b01000, 5'b00001,3'b000,  5'b01001, 7'b0110011}; // ADD, armazena o valor x8 + x1 no x9
+    registradores[1] = {7'b0100000, 5'b00001, 5'b01000, 3'b000,  5'b01010, 7'b0110011}; // SUB, armazena o valor x8 - x1 no x10
     // registradores[11] = {12'b000000000011, 5'b00001, 3'b000,  5'b01011, 7'b010011}; // ADDI, armazena o valor x1 + 3 no x11
     // registradores[12] = {20'b00000000000000000001, 5'b01100, 7'b0010111 };// AUIPC, imediato vale 1, soma-se ele << 12 com o PC (que vale 12) e armazena-se no x12;
     // registradores[13] = {1'b0, 10'b0000000100, 1'b0, 8'b00000000, 5'b01101, 7'b1101111};// JAL, vai registrar PC + 4 no x13 e vai somar 2 no PC (proxima instrução eh JALR)
@@ -58,12 +58,12 @@ end
 
 
 assign dout = registradores[ads]; // Full instruction, goes to IR
-assign rd = registradores[ads][11:7]; // Write addres for the registers in LOAD, ADD, SUB, ADDI instructions
-assign rs1 =  registradores[ads][19:15]; // Read addres for the registers in LOAD, ADD, SUB, STORE, ADDI, BNE, ... instructions
-assign rs2 = registradores[ads][24:20]; // Another read addres for the registers in ADD, SUB, STORE, BNE, BEQ, ... instructions
-assign opcode =  registradores[ads][6:0]; // Opcode in all instructions
-assign funct7 = registradores[ads][30]; // For ADD and SUB
-assign funct3 = registradores[ads][14:12]; // For ADD and SUB
+// assign rd = registradores[ads][11:7]; // Write addres for the registers in LOAD, ADD, SUB, ADDI instructions
+// assign rs1 =  registradores[ads][19:15]; // Read addres for the registers in LOAD, ADD, SUB, STORE, ADDI, BNE, ... instructions
+// assign rs2 = registradores[ads][24:20]; // Another read addres for the registers in ADD, SUB, STORE, BNE, BEQ, ... instructions
+// assign opcode =  registradores[ads][6:0]; // Opcode in all instructions
+// assign funct7 = registradores[ads][30]; // For ADD and SUB
+// assign funct3 = registradores[ads][14:12]; // For ADD and SUB
 
 
 

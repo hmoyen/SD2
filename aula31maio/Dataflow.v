@@ -126,7 +126,7 @@ input      [31:0] data_in;
 output reg [31:0] data_out;
 
 initial begin
-    data_out <=0;
+    data_out <=2;
 
 end
 
@@ -139,13 +139,19 @@ end
 endmodule
 
 
-module IR(clock, r_enable, data_in, data_out);
+module IR(clock, r_enable, data_in, data_out, rs1, rs2, rd, opcode, funct7, funct3);
 
 input             clock;
 input             r_enable;
 input      [31:0] data_in;
-output reg [31:0] data_out;
-output reg [6:0] opcode;
+output  reg   [31:0] data_out;
+output [6:0] opcode;
+output  [4:0] rs1;
+output  [4:0] rd;
+output  [4:0] rs2;
+output  funct7;
+output  [2:0] funct3;
+
 
 always @(posedge clock)
 begin
@@ -154,6 +160,13 @@ begin
     end
 
 end
+
+assign rd = data_out[11:7]; // Write addres for the registers in LOAD, ADD, SUB, ADDI instructions
+assign rs1 =  data_out[19:15]; // Read addres for the registers in LOAD, ADD, SUB, STORE, ADDI, BNE, ... instructions
+assign rs2 = data_out[24:20]; // Another read addres for the registers in ADD, SUB, STORE, BNE, BEQ, ... instructions
+assign opcode =  data_out[6:0]; // Opcode in all instructions
+assign funct7 =  data_out[30]; // For ADD and SUB
+assign funct3 =  data_out[14:12]; // For ADD and SUB
 
 endmodule
 
