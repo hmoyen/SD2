@@ -58,13 +58,15 @@ module state_machineUC (clk,reset,state_reg);
 
 endmodule
 
-module UC (clk,state_reg,opcode,aluop);
+module UC (clk,state_reg,opcode,aluop,r_enableMUX);
 
   input wire clk;
   input wire [3:0] state_reg;
   reg [3:0] state_next;
   input [6:0] opcode;
   output [1:0] aluop;
+  output reg r_enableMUX;
+  reg [6:0] reg_opcode;
   //quem recebe a instrução é o FD
   parameter IDLE = 4'b0000, FETCH = 4'b0001, DECODE = 4'b0010, EXECUTE = 4'b0011,
   WRITE_BACK = 4'b0100;
@@ -77,14 +79,17 @@ module UC (clk,state_reg,opcode,aluop);
       case (state_reg)
         IDLE:
         begin
-            state_next = FETCH;
+
           end
         FETCH:
          begin
+          r_enableMUX=1;
             //vai passar um sinal que vai permitir gravar a instrução da memória no IR e é lá que vai distrinchar as partes
           end
         DECODE:
           begin
+          r_enableMUX=0;
+          reg_opcode<=opcode;
             //vai pegar o opcode
           end
         EXECUTE:
