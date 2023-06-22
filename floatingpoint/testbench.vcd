@@ -1,0 +1,311 @@
+$date
+	Thu Jun 22 00:49:13 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module testbench $end
+$var wire 27 ! ula_tb [26:0] $end
+$var wire 27 " round_fract_tb [26:0] $end
+$var wire 32 # resultado_tb [31:0] $end
+$var wire 8 $ exp_dif_tb [7:0] $end
+$var reg 1 % clock_tb $end
+$var reg 32 & operando_a_tb [31:0] $end
+$var reg 32 ' operando_b_tb [31:0] $end
+$var reg 9 ( sinalIncOrDec_tb [8:0] $end
+$var reg 1 ) sinalMuxFP1_tb $end
+$var reg 1 * sinalMuxFP2_tb $end
+$var reg 1 + sinalMuxFP3_tb $end
+$var reg 1 , sinalMuxFP4_tb $end
+$var reg 1 - sinalMuxFP5_tb $end
+$var reg 1 . sinalRound_tb $end
+$var reg 8 / sinalShiftFract_tb [7:0] $end
+$var reg 9 0 sinalShiftRes_tb [8:0] $end
+$scope module fd $end
+$var wire 1 % clock $end
+$var wire 8 1 exp_dif [7:0] $end
+$var wire 32 2 operando_a [31:0] $end
+$var wire 32 3 operando_b [31:0] $end
+$var wire 9 4 sinalIncOrDec [8:0] $end
+$var wire 1 ) sinalMuxFP1 $end
+$var wire 1 * sinalMuxFP2 $end
+$var wire 1 + sinalMuxFP3 $end
+$var wire 1 , sinalMuxFP4 $end
+$var wire 1 - sinalMuxFP5 $end
+$var wire 1 . sinalRound $end
+$var wire 8 5 sinalShiftFract [7:0] $end
+$var wire 9 6 sinalShiftRes [8:0] $end
+$var wire 28 7 ula_out [27:0] $end
+$var wire 8 8 ula_exp_out [7:0] $end
+$var wire 8 9 ula_exp_one_out [7:0] $end
+$var wire 27 : ula [26:0] $end
+$var wire 28 ; shift_right_out [27:0] $end
+$var wire 28 < shift_res_out [27:0] $end
+$var wire 26 = round_fract_out [25:0] $end
+$var wire 27 > round_fract [26:0] $end
+$var wire 8 ? round_exp_out [7:0] $end
+$var wire 32 @ resultado [31:0] $end
+$var wire 8 A reg_exp_out [7:0] $end
+$var wire 28 B mux5_out [27:0] $end
+$var wire 8 C mux4_out [7:0] $end
+$var wire 25 D mux3_out [24:0] $end
+$var wire 28 E mux2_out [27:0] $end
+$var wire 8 F mux1_out [7:0] $end
+$scope module mux_fp1 $end
+$var wire 8 G exp1 [7:0] $end
+$var wire 8 H exp2 [7:0] $end
+$var wire 1 ) sinalMuxFP1 $end
+$var wire 8 I smallestExp [7:0] $end
+$upscope $end
+$scope module mux_fp2 $end
+$var wire 25 J fraction1 [24:0] $end
+$var wire 25 K fraction2 [24:0] $end
+$var wire 1 * sinalMuxFP2 $end
+$var wire 28 L biggerNumber [27:0] $end
+$upscope $end
+$scope module mux_fp3 $end
+$var wire 25 M fraction1 [24:0] $end
+$var wire 25 N fraction2 [24:0] $end
+$var wire 1 + sinalMuxFP3 $end
+$var wire 25 O smallerNumber [24:0] $end
+$upscope $end
+$scope module mux_fp4 $end
+$var wire 8 P exp1 [7:0] $end
+$var wire 1 , sinalMuxFP4 $end
+$var wire 8 Q exp2 [7:0] $end
+$var wire 8 R exp [7:0] $end
+$upscope $end
+$scope module mux_fp5 $end
+$var wire 28 S fraction2 [27:0] $end
+$var wire 1 - sinalMuxFP5 $end
+$var wire 28 T fraction1 [27:0] $end
+$var wire 28 U fraction [27:0] $end
+$upscope $end
+$scope module registrador $end
+$var wire 1 % clock $end
+$var wire 8 V data_in [7:0] $end
+$var reg 8 W data_out [7:0] $end
+$upscope $end
+$scope module round $end
+$var wire 1 % clock $end
+$var wire 26 X fract_inicial [25:0] $end
+$var wire 1 . sinal $end
+$var wire 8 Y exp_inicial [7:0] $end
+$var wire 26 Z arredondado [25:0] $end
+$var reg 8 [ exp_final [7:0] $end
+$var reg 26 \ fract_final [25:0] $end
+$upscope $end
+$scope module shift_fraction $end
+$var wire 25 ] b [24:0] $end
+$var wire 8 ^ sinal [7:0] $end
+$var wire 28 _ res [27:0] $end
+$upscope $end
+$scope module shift_res $end
+$var wire 28 ` b [27:0] $end
+$var wire 9 a sinal [8:0] $end
+$var wire 28 b res [27:0] $end
+$upscope $end
+$scope module ula_exp $end
+$var wire 8 c a [7:0] $end
+$var wire 8 d b [7:0] $end
+$var wire 8 e sub [7:0] $end
+$upscope $end
+$scope module ula_exp_one $end
+$var wire 8 f b [7:0] $end
+$var wire 9 g sinal [8:0] $end
+$var wire 8 h res [7:0] $end
+$upscope $end
+$scope module ula_fraction $end
+$var wire 28 i a [27:0] $end
+$var wire 28 j b [27:0] $end
+$var wire 27 k soma [26:0] $end
+$var wire 1 l sinal $end
+$var wire 1 m overflow $end
+$var wire 28 n add [27:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b0 n
+1m
+0l
+b0 k
+b10000000000000000000000000 j
+b110000000000000000000000000 i
+b10000000 h
+b1 g
+b1111111 f
+b1 e
+b1111110 d
+b1111111 c
+b0 b
+b100000000 a
+b0 `
+b10000000000000000000000000 _
+b1 ^
+b100000000000000000000000 ]
+bx \
+bx [
+b0 Z
+b10000000 Y
+b0 X
+bx W
+b1 V
+b0 U
+b0 T
+b10xxxxxxxxxxxxxxxxxxxxxxxxxx S
+b1111111 R
+bx Q
+b1111111 P
+b100000000000000000000000 O
+b100000000000000000000000 N
+b110000000000000000000000 M
+b110000000000000000000000000 L
+b100000000000000000000000 K
+b110000000000000000000000 J
+b1111111 I
+b1111110 H
+b1111111 G
+b1111111 F
+b110000000000000000000000000 E
+b100000000000000000000000 D
+b1111111 C
+b0 B
+bx A
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx @
+bx ?
+b0xxxxxxxxxxxxxxxxxxxxxxxxxx >
+bx =
+b0 <
+b10000000000000000000000000 ;
+b0 :
+b10000000 9
+b1 8
+b0 7
+b100000000 6
+b1 5
+b1 4
+b111111000000000000000000000000 3
+b111111110000000000000000000000 2
+bx 1
+b100000000 0
+b1 /
+0.
+0-
+0,
+1+
+0*
+0)
+b1 (
+b111111000000000000000000000000 '
+b111111110000000000000000000000 &
+0%
+bx $
+b0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx #
+b0xxxxxxxxxxxxxxxxxxxxxxxxxx "
+b0 !
+$end
+#10
+b1 $
+b1 1
+b1 A
+b1 W
+b1000000000000000000000000000000 #
+b1000000000000000000000000000000 @
+b10000000 ?
+b10000000 Q
+b10000000 [
+b1000000000000000000000000000 S
+b0 "
+b0 >
+b0 =
+b0 \
+1%
+#20
+0%
+#30
+1%
+#40
+0%
+#50
+b11011100101011000000100000 Z
+b11011100101011000000100100 X
+b110111001010110000001001000 <
+b110111001010110000001001000 b
+b111011100101011000000100100 B
+b111011100101011000000100100 U
+b111011100101011000000100100 `
+b111011100101011000000100100 !
+b111011100101011000000100100 :
+b10100010010011011101001100 ;
+b10100010010011011101001100 _
+b10100010010011011101001100 j
+b111011100101011000000100100 7
+b111011100101011000000100100 T
+b111011100101011000000100100 n
+b111011100101011000000100100 k
+0m
+b101000100100110111010011 D
+b101000100100110111010011 O
+b101000100100110111010011 ]
+b100111010010111100011011000 E
+b100111010010111100011011000 L
+b100111010010111100011011000 i
+b10000000 d
+b10000000 H
+b100111010010111100011011 K
+b100111010010111100011011 N
+b101000100100110111010011 J
+b101000100100110111010011 M
+1%
+b100000001 0
+b100000001 6
+b100000001 a
+0+
+1*
+b1000000000111010010111100011011 '
+b1000000000111010010111100011011 3
+b111111101000100100110111010011 &
+b111111101000100100110111010011 2
+#60
+0%
+#70
+b1000000011011100101011000000100 #
+b1000000011011100101011000000100 @
+b1011011100101011000000100000 S
+b11011100101011000000100000 "
+b11011100101011000000100000 >
+b11011100101011000000100000 =
+b11011100101011000000100000 \
+1%
+#80
+0%
+#90
+1%
+#100
+0%
+#110
+1%
+#120
+0%
+#130
+1%
+#140
+0%
+#150
+1%
+#160
+0%
+#170
+1%
+#180
+0%
+#190
+1%
+#200
+0%
