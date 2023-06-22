@@ -54,28 +54,42 @@ module testbench;
         sinalMuxFP3_tb = 1; // b < a
         sinalMuxFP5_tb = 0;
         sinalShiftFract_tb = 1; // shift de b em 1
-        sinalShiftRes_tb  = 9'b100000000; // deu overflow na soma, logo não precisamos shiftar nada
-        sinalIncOrDec_tb  = 9'b000000001; // mas sabe-se que o expoente deve aumentar em 1
+        sinalShiftRes_tb  = 9'b100000000; // nao precisamos shiftar nada (mantissa eh 0)
+        sinalIncOrDec_tb  = 9'b000000000; // 
         sinalMuxFP4_tb = 0;
         sinalRound_tb = 0;
-        // esperado: 01000000000000000000000000000000 = 2.0
+        // esperado: 01000000000000000000000000000000 =
         #50
         $display("Resultado de 1,5 + 0,5: %b", resultado_tb);
         operando_a_tb = 32'b00111111101000100100110111010011; // 1,268
         operando_b_tb = 32'b01000000000111010010111100011011; // 2,456
         // esperado : 01000000011011100101011000000100 = 3,724
-        sinalMuxFP1_tb = 0; // exp de 1,268 eh menor que de 2,456
-        sinalMuxFP2_tb = 1; // b > a
-        sinalMuxFP3_tb = 0; // a < b
+        sinalMuxFP1_tb = 1; // exp de 1,268 eh menor que de 2,456
+        sinalMuxFP2_tb = 1; // b > a (em modulo)
+        sinalMuxFP3_tb = 0; // a < b (eme modulo)
         sinalMuxFP5_tb = 0;
         sinalShiftFract_tb = 1; // shift de a em 1
-        sinalShiftRes_tb  = 9'b100000001;
-        sinalIncOrDec_tb  = 9'b000000001;
+        sinalShiftRes_tb  = 9'b100000001; // shift de um para esquerda 
+        sinalIncOrDec_tb  = 9'b100000001; // decrementa 1, pois shiftamos uma vez para a esquerda
         sinalMuxFP4_tb = 0;
         sinalRound_tb = 0;
         #50
         $display("Resultado de 1,268 + 2,456 %b", resultado_tb);
+        operando_a_tb = 32'b10111111101000100100110111010011; // -1,268
+        operando_b_tb = 32'b01000000000111010010111100011011; // 2,456
+        // esperado : 00111111100110000001000001100011 = 1,188000
+         //           00111111100110000001000001100011
+        sinalMuxFP1_tb = 1; // exp de 1,268 eh menor que de 2,456
+        sinalMuxFP2_tb = 1; // b > a (em modulo)
+        sinalMuxFP3_tb = 0; // a < b (em modulo)
+        sinalMuxFP5_tb = 0;
+        sinalShiftFract_tb = 1; // shift de a em 1
+        sinalShiftRes_tb  = 9'b100000010; // shift de dois para esquerda 
+        sinalIncOrDec_tb  = 9'b100000010; // decrementa 2, pois shiftamos duas vezes para a esquerda
+        sinalMuxFP4_tb = 0;
+        sinalRound_tb = 0;
         #100
+        $display("Resultado de - 1,268 + 2,456 %b", resultado_tb);
 
 
         $display("Fim da simulação");

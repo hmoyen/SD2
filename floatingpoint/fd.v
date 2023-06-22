@@ -48,7 +48,7 @@ MuxFP1 mux_fp1(
     .exp1(operando_a[30:23]),
     .exp2(operando_b[30:23]),
     .sinalMuxFP1(sinalMuxFP1),
-    .smallestExp(mux1_out)
+    .greatestExp(mux1_out)
 );
 
 MuxFP2 mux_fp2(
@@ -134,9 +134,14 @@ assign arredondado = (fract_inicial[2:0] == 3'b111) ? ({fract_inicial[25:3]+1'b1
                             {fract_inicial[25:3], 3'b000};
 
 always @(posedge clock)
-begin
+begin   
+    if(sinal) begin
         fract_final <= arredondado; 
-        exp_final <= exp_inicial;
+    end
+    else begin
+        fract_final <= fract_inicial;
+    end
+    exp_final <= exp_inicial;
 
 end
                            
@@ -221,14 +226,14 @@ assign res = (sinal[8] == 1'b0) ? (b+sinal[7:0]):
      
 endmodule
 
-module MuxFP1 (exp1, exp2, sinalMuxFP1, smallestExp);
+module MuxFP1 (exp1, exp2, sinalMuxFP1, greatestExp);
 
 input [7:0] exp1;
 input [7:0] exp2;
-output [7:0] smallestExp; // Vai para MuxFP4
+output [7:0] greatestExp; // Vai para MuxFP4
 input sinalMuxFP1;
 
-assign smallestExp = (sinalMuxFP1 == 1'b0) ? (exp1) : (exp2);
+assign greatestExp = (sinalMuxFP1 == 1'b0) ? (exp1 + 1'b1) : (exp2 + 1'b1); // adicionando um bit ao expoente pois colocamos o 1 implicito para fazer as contas
 
 endmodule
 
