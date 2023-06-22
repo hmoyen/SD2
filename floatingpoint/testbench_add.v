@@ -90,7 +90,20 @@ module testbench;
         sinalRound_tb = 0;
         #100
         $display("Resultado de - 1,268 + 2,456 %b", resultado_tb);
-
+        operando_a_tb = 32'b01000001101001010101110000101001; // 20.6700000763
+        operando_b_tb = 32'b00111111001010111000010100011111; // 0.670000016689
+        // esperado : 01000001101010101011100001010010 = 21.3400001526
+        sinalMuxFP1_tb = 0; // exp de 0.67 eh menor 
+        sinalMuxFP2_tb = 0; // a > b
+        sinalMuxFP3_tb = 1; // b < a
+        sinalMuxFP5_tb = 0;
+        sinalShiftFract_tb = 5; 
+        sinalShiftRes_tb  = 9'b100000001; // shift de dois para esquerda 
+        sinalIncOrDec_tb  = 9'b100000001; // decrementa 2, pois shiftamos duas vezes para a esquerda
+        sinalMuxFP4_tb = 0;
+        sinalRound_tb = 1; // Verifique no GTK Wave o arredondamento que o corre
+        #100
+        $display("Resultado de 20.67 + 0.67  %b", resultado_tb);
 
         $display("Fim da simulação");
         $finish;
