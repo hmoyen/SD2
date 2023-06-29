@@ -1,10 +1,11 @@
-module fd(clock, operando_a, op, reset, operando_b, sinalMuxFP1, sinalMuxFP2, sinalMuxFP3, sinalMuxFP4, sinalMuxFP5, sinalShiftFract, sinalShiftRes, sinalIncOrDec, sinalRound, exp_dif, ula, round_fract, resultado);
+module fd(clock,start, operando_a, op, reset, operando_b, sinalMuxFP1, sinalMuxFP2, sinalMuxFP3, sinalMuxFP4, sinalMuxFP5, sinalShiftFract, sinalShiftRes, sinalIncOrDec, sinalRound, exp_dif, ula, round_fract, resultado);
 
 input [31:0] operando_a, operando_b;
 input sinalMuxFP1, sinalMuxFP2, sinalMuxFP3, sinalMuxFP4, sinalMuxFP5;
 input [7:0] sinalShiftFract;
 input [8:0] sinalShiftRes;
 input clock;
+input start;
 input [1:0] op;
 input [8:0] sinalIncOrDec;
 input sinalRound;
@@ -83,7 +84,8 @@ ULA_Float ula_float(
     .resultado(ula_out), 
     .reset(reset), 
     .clock(clock), 
-    .op(op)
+    .op(op),
+    .start(start)
     );
 
 MuxFP5 mux_fp5 (
@@ -142,8 +144,9 @@ input [25:0] fract_inicial;
 output reg [25:0] fract_final;
 wire [25:0] arredondado;
 input sinal;
+wire overflow;
 
-assign arredondado = (fract_inicial[2:0] == 3'b111) ? ({fract_inicial[25:3]+1'b1, 3'b000}):
+assign {overflow,arredondado} = (fract_inicial[2:0] == 3'b111) ? ({fract_inicial[25:3]+1'b1, 3'b000}):
                            (fract_inicial[2:0] == 3'b101) ? ({fract_inicial[25:3]+1'b1, 3'b000}):
                            (fract_inicial[2:0] == 3'b110) ? ({fract_inicial[25:3]+1'b1, 3'b000}):
                            (fract_inicial[2:0] == 3'b100 && fract_inicial[3]==1'b1) ? ({fract_inicial[25:3]+1'b1, 3'b000}):
@@ -226,8 +229,8 @@ input [7:0] b;
 input [8:0] sinal;
 output [7:0] res;
 
-assign res = (sinal[8] == 1'b0) ? (b+sinal[7:0]):
-                                  (b-sinal[7:0]); 
+assign res = (sinal[8] == 1'b0) ? (b+sinal[7:0]+127):
+                                  (b-sinal[7:0]+127); 
      
 endmodule
 
@@ -300,7 +303,7 @@ endmodule
 
 // MULT
 
-module ULA_Float(a, b, resultado, reset, clock, op); // Multiplicação
+module ULA_Float(a, b, resultado, reset, clock, op, start); // Multiplicação
 
 input [27:0] b, a; // Mantissa e o bit de sinal
 input [1:0] op; // 00 - SOMA, 01 - MULT
@@ -308,6 +311,7 @@ wire [26:0] soma;
 wire overflow;
 wire sinal;
 wire [27:0] add;
+input start;
 
 assign {sinal, overflow, soma} = (a[27]|b[27] == 1'b0) ? {1'b0,(a+b)} : // OR com os bits de sinal para verificar se os dois são positivos
               (a[27] == 1'b1 && (a[26:0] > b[26:0])) ? {1'b1,(a-b)}:
@@ -322,17 +326,17 @@ wire [27:0] multiplicador;
 wire [27:0] multiplicando;
 input reset;
 input clock;
-wire [53:0] produto;
+wire [52:0] produto;
 output [27:0] resultado;
 
-wire [54:0] produto_in;
-wire [54:0] produto_out;
-wire [54:0] produto_soma;
+wire [52:0] produto_in;
+wire [52:0] produto_out;
+wire [52:0] produto_soma;
 wire [26:0] multiplicador_shift_in;
 wire [26:0] multiplicador_shift_out;
-wire [53:0] multiplicando_shift_in;
-wire [53:0] multiplicando_shift_out;
-wire [54:0] produto_shift;
+wire [52:0] multiplicando_shift_in;
+wire [52:0] multiplicando_shift_out;
+wire [52:0] produto_shift;
 wire [4:0] N_out;
 wire [4:0] N_in;
 wire done;
@@ -374,12 +378,14 @@ registrador_multiplicando multD(
 
 assign multiplicador = a;
 assign multiplicando = b;
-assign multiplicador_shift_in = (reset) ? multiplicador[26:0]: multiplicador_shift_out >> 1; //Shift do multiplicador
-assign multiplicando_shift_in = (reset) ? {27'b0, multiplicando[26:0]}: multiplicando_shift_out << 1; // Shift do multiplicando
+// assign multiplicador_shift_in = multiplicador;
+// assign multiplicando_shift_in = multiplicando;
+assign multiplicador_shift_in = (start) ? multiplicador[26:0]: multiplicador_shift_out; //Shift do multiplicador
+assign multiplicando_shift_in = (start) ? {27'b0, multiplicando[26:0]}: multiplicando_shift_out; // Shift do multiplicando
 assign produto_soma = (multiplicador_shift_out[0] == 1) ? (produto_out + multiplicando_shift_out): produto_out; // Soma
 assign produto = (done) ? produto_soma: 9'bz; // Produto final
 
-assign resultado = (op == 2'b00) ? add: {a[27]^b[27],produto[53:27]};
+assign resultado = (op == 2'b00) ? add: {a[27]^b[27],produto[52:26]};
 
 endmodule
 
@@ -392,7 +398,11 @@ output  reg   [26:0] data_out;
 
 always @(posedge clock or posedge reset)
 begin   
-            data_out <= data_in; 
+        if(reset) begin
+            data_out <= data_in;
+        end else begin
+            data_out <= data_in >> 1; 
+        end
 
 end
 endmodule
@@ -400,13 +410,18 @@ endmodule
 module registrador_multiplicando(data_in, data_out, clock, reset);
 
 input             clock;
-input      [53:0] data_in;
+input      [52:0] data_in;
 input               reset;
-output  reg   [53:0] data_out;
+output  reg   [52:0] data_out;
 
 always @(posedge clock or posedge reset)
 begin   
-            data_out <= data_in; 
+
+        if(reset) begin
+            data_out <= data_in;
+        end else begin
+            data_out <= data_in << 1; 
+        end 
 
 end
 endmodule
@@ -414,14 +429,14 @@ endmodule
 module registrador_soma(clock, data_in, data_out, reset);
 
 input             clock;
-input      [54:0] data_in;
+input      [52:0] data_in;
 input               reset;
-output  reg   [54:0] data_out;
+output  reg   [52:0] data_out;
 
 always @(posedge clock or posedge reset)
 begin   
         if(reset) 
-            data_out <=0;
+            data_out <= 0;
         else 
             data_out <= data_in[54:0]; 
 

@@ -15,6 +15,7 @@ module testbench;
     reg [8:0] sinalIncOrDec_tb;
     reg sinalRound_tb;
     reg clock_tb;
+    reg start_tb;
     reg [1:0] op_tb;
     reg reset_tb;
 
@@ -26,6 +27,7 @@ module testbench;
     fd fd(
         .clock(clock_tb), 
         .op(op_tb),
+        .start(start_tb),
         .operando_a(operando_a_tb), 
         .operando_b(operando_b_tb),
         .sinalMuxFP1(sinalMuxFP1_tb), 
@@ -114,9 +116,8 @@ module testbench;
         #100
 
         $display("Resultado de 20.67 + 0.67  %b", resultado_tb);
-        clock_tb  = 0;
-        #1
         reset_tb = 1;
+        start_tb = 1;
         op_tb = 2'b10;
         operando_a_tb = 32'b00111111101001010110000001000010; //1.292
         operando_b_tb = 32'b00111111110000000000000000000000;//1.5
@@ -125,9 +126,11 @@ module testbench;
         sinalMuxFP3_tb = 1; // b < a
         sinalMuxFP4_tb = 0; 
         sinalMuxFP5_tb = 0;
-        sinalShiftRes_tb  = 9'b100000010; // shift de dois para esquerda 
+        sinalShiftRes_tb  = 9'b100000001; 
         sinalIncOrDec_tb  = 9'b100000010;
         #10
+        #20
+        start_tb = 0;
         reset_tb = 0;
         #1000
         $display("Fim da simulação: %b", resultado_tb);
