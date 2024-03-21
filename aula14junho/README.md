@@ -4,8 +4,21 @@ This Verilog project involves the creation of a RISC-V processor, integrating da
 
 ## Project Components:
 
-1.**UC**                                                                      
-2.**Dataflow**
+- **(UC):**
+  - CPU of the RISC-V processor.
+  - Manages instruction decoding, control signal generation, and state transitions.
+  - Inputs: clock, reset, opcode; Outputs: control signals (memory write enables, register file write enables, ALU control signals, multiplexer selector signals).
+  - Integrates a state machine for efficient operation (IDLE, FETCH, DECODE, EXECUTE, WRITE_BACK).
+  - Generates control signals based on current state and opcode for instruction processing.
+
+- **Data Flow:**
+  - Involves accessing data and instruction memory, ALU operations, and register file management.
+  - Instructions fetched from instruction memory; data read from or written to data memory.
+  - ALU performs operations (addition, subtraction, logical AND, OR) based on control signals.
+  - Register file stores operands and results, controlled by the microcontroller.
+  - Immediate values generated for instructions based on opcode and instruction fields.
+  - Control signals direct data flow, with multiplexers selecting inputs based on signals.
+
 
 ## Functionality:
 - The microcontroller processes instructions fetched from memory and executes them based on the opcode.
