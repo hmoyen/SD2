@@ -1,6 +1,6 @@
-# Repositório para a matéria de Sistemas Digitais II
+# Repository for the Digital Systems II course
 
-Cada pasta, há os códigos das aulas e alguns exercícios extras. 
+In each folder, there are the codes from the classes and some exercises.
 
-Tabela de entradas: https://docs.google.com/spreadsheets/d/1h2xWTFdMxnlP-RfZsiUlPSTNYCuKOGtTz6YcoHQvhck/edit#gid=0
-Tabela RISC-V: https://five-embeddev.com/riscv-isa-manual/latest/instr-table.html
+Inputs: https://docs.google.com/spreadsheets/d/1h2xWTFdMxnlP-RfZsiUlPSTNYCuKOGtTz6YcoHQvhck/edit#gid=0
+Table - RISC-V: https://five-embeddev.com/riscv-isa-manual/latest/instr-table.html
