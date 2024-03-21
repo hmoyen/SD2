@@ -4,7 +4,7 @@ This Verilog project involves the creation of a RISC-V processor, integrating da
 
 ## Project Components:
 
-1.**UC**
+1.**UC**                                                                      
 2.**Dataflow**
 
 ## Functionality:
